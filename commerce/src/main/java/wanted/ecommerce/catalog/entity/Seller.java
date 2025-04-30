@@ -1,23 +1,21 @@
-package wanted.ecommerce.brand.entity;
+package wanted.ecommerce.catalog.entity;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "brands",
-	uniqueConstraints = {
-		@UniqueConstraint(columnNames = "slug")
-	})
+@Table(name = "sellers")
 @Entity
-public class Brand {
+public class Seller {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +28,6 @@ public class Brand {
 		length = 100)
 	private String name;
 
-	@Column(name = "slug",
-		nullable = false,
-		unique = true,
-		length = 100)
-	private String slug;
-
-	@Lob
 	@Column(name = "description",
 		nullable = true,
 		columnDefinition = "TEXT")
@@ -47,8 +38,25 @@ public class Brand {
 		length = 255)
 	private String logoUrl;
 
-	@Column(name = "website",
+	@Column(name = "rating",
 		nullable = true,
-		length = 255)
-	private String website;
+		precision = 3,
+		scale = 2)
+	private BigDecimal rating;
+
+	@Column(name = "contact_email",
+		nullable = true,
+		length = 100)
+	private String contactEmail;
+
+	@Column(name = "contact_phone",
+		nullable = true,
+		length = 20)
+	private String contactPhone;
+
+	@Column(name = "created_at",
+		nullable = true,
+		updatable = false,
+		columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private LocalDateTime createdAt;
 }
