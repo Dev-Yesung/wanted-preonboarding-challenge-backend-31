@@ -60,7 +60,7 @@ public class ProductOption {
 		nullable = false)
 	private ProductOptionGroup optionGroup;
 
-	@OneToMany(mappedBy = "option",
+	@OneToMany(mappedBy = "productOption",
 		cascade = CascadeType.ALL,
 		orphanRemoval = true)
 	private List<ProductImage> productImages = new ArrayList<>();
